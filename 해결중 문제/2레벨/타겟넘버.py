@@ -1,29 +1,15 @@
+from itertools import product
+
 def solution(numbers, target):
-    start = ''
+    l = [(x, -x) for x in numbers]
+    # 주어진 값은 + 또는 - 의 값을 잉요해 합한 후 결과값을 비교합니다. 
+    # 즉, 주어진 값은 +x 또는 -x 의 2가지 경우의 수로 나뉩니다.
 
-    # 리스트 절반의 합보다 결과값이 낮다면 +가 많도록 시작.
-    # 아니라면 -가 많도록 시작.
-    if sum(numbers[:len(numbers)//2]) < target:
-        start = '+'
-        end = '-'
-    else:
-        start = '-'
-        end = '+'
+    s = list(map(sum, product(*l)))
+    # product(*l) = [ [a,b,c,d,e], [a,b,c,d,-e], [a,b,c,-d,e], [a,b,-c,d,e], [a,-b,c,d,e], [-a,b,c,d,e], [-a,b,c,d,-e],  ...  ] 
+    # itertools 라이브러리 중 product함수를 사용해 모든 경우의 수를 담은 리스트를 만듭니다.
     
-    # 전부 더한 값으로 값 비교.
-    # -를 하나씩 늘려감.
-
-
-    answer = 0
-    return answer
-
+    return s.count(target)
+    # 후에 각 list의 값들을 합하여 target과 일치하는 개수를 찾습니다.
 
 print( solution( [1, 1, 1, 1, 1], 3 ) )
-
-
-# 모두 같은 값일 경우
-# - 를 하나씩 늘려가며 정답값이 나오도록 만든다.
-# +,-의 개수를 찾아서 조합 돌리기. nC(-개수 or + 개수)
-
-# 아닐 경우 
-# 동적 계획법? 모든 값에 +,-의 조합을 사용해서 구한다?
