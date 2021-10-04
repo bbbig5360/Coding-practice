@@ -59,24 +59,15 @@
 #         answer[j] = ''.join(answer[j])
 #         answer[j] = answer[j].replace('0',' ')
 #         answer[j] = answer[j].replace('1','#')
-            
     # return answer
 
 # def solution(n, arr1, arr2):
 #     answer = []
 #     for i in range(n):
 #         answer.append([[],[]])
-
-#         # 각각의 배열의 숫자를 2진수로 바꾼 뒤( foramt(,'b') )
-#         # 해당 숫자를 .zfill() 하여 요구하는 자리수에 맞는 숫자로 변형합니다.
 #         answer[i][0], answer[i][1] = format( arr1[i], 'b').zfill(n), format( arr2[i], 'b').zfill(n)
-
-#         # 변경된 숫자 두개를 or 연산처럼 계산하여 ' ' 또는 '#'을 이용한 리스트로 만듭니다.
 #         tmp = [' ' if a=='0' and b=='0' else '#' for a,b in zip(answer[i][0], answer[i][1]) ] 
-
-#         # 각 ' '와 '#'를 연결해 비밀지도를 만듭니다.
 #         answer[i] = ''.join(tmp)
-            
 #     return answer
 
 def solution(n, arr1, arr2):
@@ -88,7 +79,6 @@ def solution(n, arr1, arr2):
         
         # 나온 숫자가 0이라면 ' '를, 1이라면 '#'으로 변경해 리스트로 만듭니다.
         answer[i] = answer[i].replace('0',' ').replace('1','#')
-            
     return answer
 
 print( solution(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]) )
