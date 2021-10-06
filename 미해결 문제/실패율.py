@@ -28,13 +28,21 @@ def solution(N, stages):
         max_index = tmp.index(max(tmp))
         answer.append( max_index )
         tmp[max_index] = 0
-    answer.pop()
-    answer.append(zero_index)
+
+    print(answer)
+    print( answer.pop() )
+    
+    while 1:
+        try:
+            answer.append(zero_index.pop())
+        except:
+            break
     return answer
 
 
 print( solution(5, [2,1,2,6,2,4,3,3]) )
 
+print( solution(4, [4,4,4,4,4]) )
 
 # 스테이지 도달했으나 클리어 못한 수 / 스테이지에 도달한 플레이어 수.
 # 위에 주어진 스테이지는, 도달했으나 클리어 못 한 스테이지. 즉, 현재 ?단계를 클리어하지 못한 사람은 현재의 숫자가 ?인 사람.
