@@ -1,3 +1,5 @@
+from collections import deque
+
 def solution(N, stages):
     answer = []
     remain_human = len(stages)
@@ -8,39 +10,46 @@ def solution(N, stages):
     for stage in stages:
         if stage != N+1:
             challenge_list[stage] += 1
-    print(challenge_list)
+        
+    print('ch_list = ',challenge_list)
 
-    zero_index = set([0])
-    print(zero_index)
+    zero_index = deque()
     for i, val in enumerate(challenge_list):
         if val == 0:
-            zero_index.add( i )
-        
-    zero_index = zero_index - {0}
+            zero_index.append( i )
+    
+    # 성공률 0인 값들 인덱스 추출.
+    zero_index.remove(0)
     print('zero_index = ',zero_index)
+
     # 실패율
-    tmp = []
+    fail_rate_list = []
     for chall in challenge_list:
-        tmp.append(chall/remain_human)
+        fail_rate_list.append(chall/remain_human)
         remain_human -= chall
+    print('실패율 = ',fail_rate_list)
 
-    for i in range( len(tmp)-1 ):
-        max_index = tmp.index(max(tmp))
+    # 실패율이 큰 인덱스부터 순서대로 추출.
+    # 실패율이 0일경우, 모두 0이 됨. 즉, 위에서 실패율 0인 인덱스 추출. 후에 대입.
+    for i in range( len(fail_rate_list)-1 ):
+        max_index = fail_rate_list.index(max(fail_rate_list))
         answer.append( max_index )
-        tmp[max_index] = 0
+        fail_rate_list[max_index] = 0
+    print('실패율이 큰 인덱스부터 추출 ',answer)
 
+    # 0일 경우, zero index일 경우 
     for i in range(N):
         try:
             if answer[i] == 0:
                 del answer[i]
-                answer.insert(i,zero_index.pop())
-                print(answer[-1])
+                answer.insert(i,zero_index.popleft())
+                print(answer)
         except:
             break
     return answer
 
 
-print( 'solution = ',solution(5, [2,1,2,6,2,4,3,3]) )
+# print( 'solution = ',solution(5, [2,1,2,6,2,4,3,3]) )
 
 print('solution = ', solution(4, [4,4,4,4,4]) )
 
