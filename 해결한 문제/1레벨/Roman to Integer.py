@@ -1,7 +1,7 @@
 ''' 
 leetcode 문제 
 
-속도 빠른 순서 : remanToInt_upgrade -> remanToInt -> inOrder_upgrade -> inOrder
+속도 빠른 순서 : remanToInt_upgrade -> remanToInt -> inOrder -> inOrder_upgrade
 
 '''
 class Solution:
@@ -103,16 +103,18 @@ print( roman_int.inOrder_upgrade('MCMXCIV'))
 print( roman_int.romanToInt_upgrade('MCMXCIV'))
 
 from time import time
+
 st = time()
 for i in range(250000):
-    roman_int.romanToInt("IIIIIV")
-    roman_int.romanToInt("IV")
-    roman_int.romanToInt("D")
-    roman_int.romanToInt("MCMXCIV")
-    roman_int.romanToInt("MMMDCMXCIV")
-    roman_int.romanToInt("IIDLV")
-    roman_int.romanToInt("IVXLCDMMIVXLCD")
-print('romanToInt = ',time() - st)
+    roman_int.inOrder("IIIIIV")
+    roman_int.inOrder("IV")
+    roman_int.inOrder("D")
+    roman_int.inOrder("MCMXCIV")
+    roman_int.inOrder("MCMXCIV")
+    roman_int.inOrder("IIDLV")
+    roman_int.inOrder("IVXLCDMMIVXLCD")
+print('inOrder = ',time() - st)
+
 
 st = time()
 for i in range(250000):
@@ -124,6 +126,18 @@ for i in range(250000):
     roman_int.inOrder_upgrade("IIDLV")
     roman_int.inOrder_upgrade("IVXLCDMMIVXLCD")
 print('inOrder_upgrade = ',time() - st)
+
+
+st = time()
+for i in range(250000):
+    roman_int.romanToInt("IIIIIV")
+    roman_int.romanToInt("IV")
+    roman_int.romanToInt("D")
+    roman_int.romanToInt("MCMXCIV")
+    roman_int.romanToInt("MMMDCMXCIV")
+    roman_int.romanToInt("IIDLV")
+    roman_int.romanToInt("IVXLCDMMIVXLCD")
+print('romanToInt = ',time() - st)
 
 
 st = time()
