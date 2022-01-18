@@ -11,7 +11,7 @@ firstBadVersion2 : 기본적인 이진탐색
 import math
 from time import time
 
-first_err_version = 1702766719
+first_err_version = 0
 class Solution:
     def isBadVersion(self, n):
         if n < first_err_version:
