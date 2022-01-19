@@ -1,7 +1,17 @@
 ''' 
-leetcode 문제 
+속도 빠른 순서 : romanToInt_upgrade -> romanToInt -> inOrder -> inOrder_upgrade
 
-속도 빠른 순서 : remanToInt_upgrade -> remanToInt -> inOrder -> inOrder_upgrade
+    romanToInt
+    : 2개로 이루어진 숫자를 찾아 숫자를 추출합니다. 나머지 문자들을 숫자로 추출합니다.
+
+    romanToInt_upgrade
+    : romanToInt에서 나머지 문자들을 숫자로 추출하는 부분을 변경
+
+    inOrder
+    : 입력받은 문자열을 2개씩 건너뛰며 계산 진행. 매번 앞과 뒤를 확인.
+
+    inOrder_upgrade
+    : 입력받은 문자열을 처음부터 하나씩 확인. 다음문자열을 확인 후 하나의 문자열이 된다면 카운트값을 주어 다음으로 넘어간다.
 
 '''
 class Solution:

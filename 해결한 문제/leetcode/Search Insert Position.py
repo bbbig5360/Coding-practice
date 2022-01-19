@@ -1,6 +1,4 @@
 ''' 
-leetcode 문제 
-
 평균적으로 속도 빠른 순서 : searchInsert2 -> searchInsert1
 
 searchInsert1 : 기존의 이진탐색 + 후처리

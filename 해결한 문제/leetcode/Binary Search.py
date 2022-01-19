@@ -1,6 +1,4 @@
 ''' 
-leetcode 문제 
-
 평균적으로 속도 빠른 순서 : solution3 -> solution2 -> solution1
 
 solution1 : 왼쪽, 오른쪽을 따로 가져가지 않고 카운트를 주어 현재 위치를 찾는 방식으로 이진탐색

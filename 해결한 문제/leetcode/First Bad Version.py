@@ -1,6 +1,4 @@
 ''' 
-leetcode 문제 
-
 평균적으로 속도 빠른 순서 : firstBadVersion2 -> firstBadVersion1
 
 firstBadVersion1 : 기존의 값에 이동값(절반값)을 +-해서 찾는 방식
