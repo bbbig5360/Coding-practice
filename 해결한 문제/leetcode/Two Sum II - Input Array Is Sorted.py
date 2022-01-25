@@ -5,6 +5,7 @@
 
 twoSum1 : 중복되는 숫자를 제외하고 만든 리스트 생성. 해당 리스트를 2개씩 골라 만든 조합(itertools.combinations())으로 합이 target인 조합 찾음.
 twoSum2 : twoSum1에서 조합 대신 (target - numbers[i])의 값이 있는지 찾아 확인
+twoSum2_1 : twoSum2에서 리스트 내의 숫자를 찾는 방법으로 index대신 in 사용( 리스트의 크기가 작을 때 속도 개선되나, 리스트 길이가 길어지면 twoSum2와 비슷한 속도 )
 twoSum3 : twoSum2에서 중복되는 숫자를 만드는 리스트 생성시 filter사용( filter함수에 의해 리스트 개수가 많아질 경우 매우 느려짐 )
 twoSum4 : 중복되는 숫자를 제외하는 리스트 생성하지 않고 바로 target - numbers[i]값이 있는지 찾아 확인.
 twoSum5 : twoSum4에서 중복되는 숫자일 경우 그냥 넘어가도록 조건문 추가
@@ -50,6 +51,21 @@ class Solution:
             except:
                 pass
 
+    def twoSum2_1(self, numbers, target):
+        answer = []
+        t = numbers[:2]
+        for idx in range(2, len(numbers)):
+            if t[-1] != t[-2] or t[-1] != numbers[idx]:
+                t.append(numbers[idx])
+
+        for i, n in enumerate(t):
+            f_num = target - n
+            if f_num in t:
+                answer.append(numbers.index(n)+1)
+                if numbers.index(n) == numbers.index(f_num):
+                    numbers[i] = 'already use'
+                answer.append(numbers.index(f_num)+1)
+                return answer
 
     def twoSum3(self, numbers, target):
         answer = []
@@ -112,6 +128,7 @@ class Solution:
 from time import time
 cmp_list = [2,7,11,15]
 
+cmp_list = [0,1,2,7,11,15,123,1215,5135]
 
 st = time()
 for i in range(500000):
@@ -122,6 +139,11 @@ st = time()
 for i in range(500000):
     Solution().twoSum2(cmp_list,5)
 print('2nd_time = ', time()-st)
+
+st = time()
+for i in range(500000):
+    Solution().twoSum2_1(cmp_list,5)
+print('2_1_time = ', time()-st)
 
 st = time()
 for i in range(500000):
@@ -143,27 +165,32 @@ cmp_list = [3,3,5,8,18,21,22,22,22,24,26,28,29,31,31,34,37,37,40,43,43,43,44,47,
 
 print('Long input')
 st = time()
-for i in range(5000):
+for i in range(1000):
     Solution().twoSum1(cmp_list,101)
 print('1st_time = ', time()-st)    
 
 st = time()
-for i in range(5000):
+for i in range(1000):
     Solution().twoSum2(cmp_list,101)
 print('2nd_time = ', time()-st)
 
 st = time()
-for i in range(5000):
+for i in range(1000):
+    Solution().twoSum2_1(cmp_list,101)
+print('2_1_time = ', time()-st)
+
+st = time()
+for i in range(1000):
     Solution().twoSum3(cmp_list,101)
 print('3rd_time = ', time()-st)
 
 st = time()
-for i in range(5000):
+for i in range(1000):
     Solution().twoSum4(cmp_list,101)
 print('4th_time = ', time()-st)
 
 st = time()
-for i in range(5000):
+for i in range(1000):
     Solution().twoSum5(cmp_list,101)
 print('5th_time = ', time()-st)
 print()
@@ -180,6 +207,11 @@ st = time()
 for i in range(5000):
     Solution().twoSum2(cmp_list,5)
 print('2nd_time = ', time()-st)
+
+st = time()
+for i in range(5000):
+    Solution().twoSum2_1(cmp_list,5)
+print('2_1_time = ', time()-st)
 
 st = time()
 for i in range(5000):
