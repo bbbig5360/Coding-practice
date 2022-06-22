@@ -2,7 +2,9 @@ def solution(id_list, report, k):
     
     if report == []:
         return [0 for x in range(len(id_list))]
-
+    
+    report = list(set(report))
+    # print(report)
     report_dict = {}
     for id in id_list:
         report_dict[id] = []
@@ -20,8 +22,9 @@ def solution(id_list, report, k):
         else:
             reported_dict[reported_p] -= 1
 
-    # print(report_dict)
-    # print(reported_dict)
+    # print('id_list = ', id_list)
+    # print('report_dict = ', report_dict)
+    # print('reported_dict = ', reported_dict)
 
     punished_people = []
 
@@ -40,10 +43,10 @@ def solution(id_list, report, k):
                     answer[idx] += 1
         else:
             continue            
-
+    
     return answer
 
 
 # print( solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2) )
-print('solution = ',solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
-print('sol2 = ', solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
+# print('solution = ',solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
+print('solution2 = ', solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
