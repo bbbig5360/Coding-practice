@@ -1,52 +1,33 @@
-def solution(id_list, report, k):
-    
+def solution(id_list, report, k):    
+    answer = [0] * len(id_list)
+
     if report == []:
-        return [0 for x in range(len(id_list))]
+        return answer
+
+    report = set(report)
+    # 중복 제거
     
-    report = list(set(report))
-    # print(report)
-    report_dict = {}
-    for id in id_list:
-        report_dict[id] = []
+    reported_dict = {x : 0 for x in id_list}
 
-    reported_dict = {}
-    for one_report in report:
-        report_p, reported_p = one_report.split(' ')
-        try:
-            reported_dict[reported_p] += 1
-        except:
-            reported_dict[reported_p] = 1
-
-        if reported_p not in report_dict[report_p]:
-            report_dict[report_p].append(reported_p)
-        else:
-            reported_dict[reported_p] -= 1
-
+    for record in report:
+        report_p, reported_p = record.split(' ')
+        reported_dict[reported_p] += 1
+            
     # print('id_list = ', id_list)
-    # print('report_dict = ', report_dict)
-    # print('reported_dict = ', reported_dict)
+    print('reported_dict = ', reported_dict)
 
-    punished_people = []
-
-    for key, val in reported_dict.items():
-        if val >= k:
-            punished_people.append(key)
-
-    answer = [0 for x in range(len(id_list))]
+    id_list_dict = {x : idx for idx, x in enumerate(id_list)}
+    # {'muzi': 0, 'frodo': 1, 'apeach': 2, 'neo': 3}
     
-    for idx, (key, vals) in enumerate(report_dict.items()):
-        # print('key = ', key)
-        if len(vals) >= 1:
-            for val in vals:
-                if val in punished_people:
-                    print('punished +1')
-                    answer[idx] += 1
-        else:
-            continue            
-    
+    for record in report:
+        report_p, reported_p = record.split(' ')
+                
+        if reported_dict[reported_p] >= k:
+            # 신고한 사람이 일정 수 이상이면 처벌받음
+            # 해당 인원이 처벌됐다는 메일을 신고한 사람에게 메세지 보낸 횟수 추가함
+            answer[id_list_dict[report_p]] += 1
+        
     return answer
 
-
-# print( solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2) )
 # print('solution = ',solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
 print('solution2 = ', solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
