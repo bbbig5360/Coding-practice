@@ -7,13 +7,14 @@ def solution(new_id):
         if ch.isalpha() or ch.isdigit():
             answer+=ch
         elif ch in special_list:
-            answer+=ch
             try:
-                if answer[-1] == '.' and answer[-2] == '.':
-                    answer = answer[:-1]
+                if ch == '.' and answer[-1] == '.':
+                    continue
+                else:
+                    answer+=ch
             except:
                 pass
-        if len(answer) > 16:
+        if len(answer) > 15:
             break
     
     if answer == '':
