@@ -32,7 +32,7 @@ def check_element(places, row_idx, col_idx, order):
     row_idx += pos_dict[order][0]
     col_idx += pos_dict[order][1]
     # 방향에 맞는 위치로 이동
-        
+
     try: 
         check_ch = places[row_idx][col_idx]
         if check_ch == 'P':
@@ -45,9 +45,11 @@ def check_element(places, row_idx, col_idx, order):
             try:
                 row_idx -= 1
                 col_idx -= 1
+                if row_idx < 0 or col_idx < 0:
+                    return False
 
                 if places[row_idx][col_idx] == 'O' and places[row_idx][col_idx+1] == 'P':
-                        ret = True
+                    ret = all_check(places, row_idx, col_idx, order)
             except:
                 pass
         else:
@@ -90,7 +92,3 @@ def solution(places):
 print('result = ', solution([["OPXOP", 
                               "PXPXO",
                               "OOXPO"],]))
-                              
-# 오류 케이스 찾음.                              
-# OP
-# PX
