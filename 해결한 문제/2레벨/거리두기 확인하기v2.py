@@ -32,15 +32,26 @@ def check_element(places, row_idx, col_idx, order):
     row_idx += pos_dict[order][0]
     col_idx += pos_dict[order][1]
     # 방향에 맞는 위치로 이동
-    if row_idx < 0 or col_idx < 0:
-        return False
-                    
+
     try: 
         check_ch = places[row_idx][col_idx]
         if check_ch == 'P':
             ret = True 
         elif check_ch == 'O':
             ret = all_check(places, row_idx, col_idx, order)
+        elif order == 0 and check_ch == 'X':
+            # 예외 케이스. 오른쪽과 아래만 확인하다보니 생기는 문제. 
+            # OPXXX, PXOOO의 경우에 찾지못함.
+            try:
+                row_idx -= 1
+                col_idx -= 1
+                if row_idx < 0 or col_idx < 0:
+                    return False
+
+                if places[row_idx][col_idx] == 'O' and places[row_idx][col_idx+1] == 'P':
+                    ret = all_check(places, row_idx, col_idx, order)
+            except:
+                pass
         else:
             pass
     except:
@@ -61,18 +72,17 @@ def solution(places):
                 # 사람이 있는지 확인. 이후 오른쪽과 아래쪽 확인
                 # 오른쪽과 아래로 훑어가면 전부 훑게되기 때문
                 # 이후 O가 나온다면 상하좌우 체크 = all_check()함수
-                if ch == 'P':
+                if ch == 'O':
                     right_ret = check_element(place, row_idx, col_idx, 'right')
                     under_ret = check_element(place, row_idx, col_idx, 'under')
-                    upper_ret = check_element(place, row_idx, col_idx, 'up')
-                    
-                    if right_ret or under_ret or upper_ret:
+                    if right_ret or under_ret:
                         ret = True
                         break
             if ret:
                 break
         answer.append(0 if ret else 1)
     return answer        
+
 # print('result = ', solution([["POOOP","OXXOX","OPXPX","OOXOX","POXXP"],
 #                              ["POOPX","OXPXP","PXXXO","OXXXO","OOOPP"], 
 #                              ["PXOPX","OXOXP","OXPOX","OXXOP","PXPOX"], 
