@@ -5,17 +5,15 @@ def solution(phone_book):
 
     for i in range(tot_len):
         if tot_len > i + 1:
-            x = phone_book[i]
+            start_num = phone_book[i]
             y = phone_book[i+1]
             
-            if x < y:
-                if x in y[:len(x)]:
-                    answer = False
-                    break
-            else:
-                if y in x[:len(y)]:
-                    answer = False
-                    break
+            if start_num > y:
+                start_num, y = y, start_num
+                
+            if start_num in y[:len(start_num)]:
+                answer = False
+                break
         
     return answer
 
