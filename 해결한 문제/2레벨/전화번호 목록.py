@@ -1,21 +1,18 @@
-from itertools import combinations
-
 def solution(phone_book):
     answer = True
-          
-    check_list = list(combinations(phone_book, 2))
-
-    for x in check_list:
-        i, j = x
-        if i < j:
-            if i in j[:len(i)]:
-                answer = False
-                break
-        else:
-            if j in i[:len(j)]:
-                answer = False
-                break
+    
+    for idx, word in enumerate(phone_book):
+        word_len = len(word)
         
+        for idx2, ch in enumerate(phone_book):
+            if idx == idx2:
+                continue
+            if word == ch[:word_len]:
+                answer = False
+                break
+            
+        if answer == False:
+            break
     return answer
 
 print(solution(["119", "97674223", "1195524421"]))
