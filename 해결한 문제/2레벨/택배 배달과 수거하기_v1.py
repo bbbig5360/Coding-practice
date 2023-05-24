@@ -1,5 +1,3 @@
-import copy
-
 def solution(cap, n, deliveries, pickups):
     answer = 0
     if sum(deliveries) == 0 and sum(pickups) == 0:
