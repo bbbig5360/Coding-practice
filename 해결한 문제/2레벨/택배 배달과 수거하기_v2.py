@@ -1,4 +1,3 @@
-import copy
 from collections import deque
 
 def solution(cap, n, deliveries, pickups):
@@ -8,7 +7,10 @@ def solution(cap, n, deliveries, pickups):
         
     d_deque = deque(deliveries)
     p_deque = deque(pickups)    
-        
+
+    if sum(deliveries) == 0 and sum(pickups) == 0:
+        return answer
+    
     while d_index != 0 or p_index != 0:
         # print('d_index= ',d_index)
         # print('p_index= ',p_index)
@@ -58,8 +60,3 @@ def solution(cap, n, deliveries, pickups):
         # print('dist =',dist)
         answer += dist*2    
     return answer
-
-print(solution(4,5,[1,0,3,1,2],[0,3,0,4,0]))
-print(solution(2,7,[1,0,2,0,1,0,2],[0,2,0,1,0,2,0]))
-print(solution(2,7,[1,9,2,10,1,0,21],[0,2,10,18,30,22,10]))
-# 차량 한도/ 배달 집 / 배달 개수 / 수거 개수
