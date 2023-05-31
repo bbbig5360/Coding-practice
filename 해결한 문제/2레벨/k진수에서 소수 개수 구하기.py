@@ -25,10 +25,10 @@ def change(n,k):
 def solution(n, k):
     answer = 0
     number = str(int(consecutively_zero_del(change(n,k))))
-    print(number)
+    print('number =',number)
     
     if '0' not in number:
-        answer = 1 if check_prime_num(int(number)) == True else False
+        answer = 1 if check_prime_num(int(number)) == True else 0
     else:
         num_list = list(map(int, number.split('0')))
         print(num_list)
