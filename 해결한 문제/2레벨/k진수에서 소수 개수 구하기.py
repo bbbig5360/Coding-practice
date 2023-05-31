@@ -28,14 +28,20 @@ def solution(n, k):
     print('number =',number)
     
     if '0' not in number:
-        answer = 1 if check_prime_num(int(number)) == True else 0
+        answer = 1 if check_prime_num(int(number)) else 0
     else:
-        num_list = list(map(int, number.split('0')))
-        print(num_list)
-        for num in num_list:
-            answer += 1 if check_prime_num(num) == True else 0
+        tmp = ''
+        for num in number:
+            if num != '0':
+                tmp += num
+            else:
+                answer += 1 if check_prime_num(int(tmp)) else 0
+                tmp = ''
+        if tmp != '':
+            answer += 1 if check_prime_num(int(tmp)) else 0
         
     return answer
 
 print(solution(437674,3))
 print(solution(110011,10))
+print(solution(10,10))
