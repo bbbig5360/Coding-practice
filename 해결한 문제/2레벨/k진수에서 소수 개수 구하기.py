@@ -1,10 +1,12 @@
+import math
+
 def check_prime_num(n):
     if n == 2:
         return True
     elif n < 2:
         return False
     
-    for i in range(2, n):
+    for i in range(2,  int(math.sqrt(n) + 1)):
         if n % i == 0:
             return False
     return True
@@ -25,7 +27,6 @@ def change(n,k):
 def solution(n, k):
     answer = 0
     number = str(int(consecutively_zero_del(change(n,k))))
-    print('number =',number)
     
     if '0' not in number:
         answer = 1 if check_prime_num(int(number)) else 0
