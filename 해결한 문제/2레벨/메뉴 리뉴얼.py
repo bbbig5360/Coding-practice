@@ -9,15 +9,9 @@ def solution(orders, course):
     single_menu = sorted(single_menu)
     
     for c_num in course:
-        if len(single_menu) < c_num:
-            continue
-        
-        course_combination_list = list(itertools.combinations(single_menu, c_num))
-
         course_dict = {}    
         for order in orders:
-            if len(order) < c_num:
-                continue
+            course_combination_list = list(itertools.combinations(sorted(order), c_num))
             for course_combination in course_combination_list:
                 flag = True
                 for c in course_combination:
