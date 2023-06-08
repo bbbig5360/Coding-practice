@@ -2,35 +2,19 @@ import time
 
 def solution(info, query):
     answer = []
-    info2number_list = []
+    info_list = []    
     
-    element2number_dict = {'cpp':0, 'backend':0, 'junior':0, 'chicken':0, 'java':1, 'frontend':1, 'senior':1, 'pizza':1, 'python':2}
-    
-    '''
-    cpp, java, python
-    backend, frontend
-    junior senior
-    chicken pizza
-    '''
     st = time.time()
     for idx, info_row in enumerate(info):
-        info_list = info_row.split()
-        info2number_list.append([])
-        for element in info_list:
-            if element in ['cpp', 'backend', 'junior', 'chicken']:
-                info2number_list[idx].append(0)
-            elif element in ['java', 'frontend', 'senior', 'pizza']:
-                info2number_list[idx].append(1)
-            elif element == 'python':
-                info2number_list[idx].append(2)
-            else:
-                info2number_list[idx].append(int(element))
-    print('info to number time =',(time.time() - st)*(100000))
+        info_list.append(info_row.split())
 
+    print('info to number time =',(time.time() - st)*(100000))
+    st = time.time()
     for query_row in query:
+        print((time.time() - st)*(100000))
         st = time.time()
         query_list = query_row.split()
-        info_strainer = [True]*len(info2number_list)
+        info_strainer = [True]*len(info)
         # print('query_list =',query_list)
         
         query_index = -1
@@ -46,24 +30,21 @@ def solution(info, query):
                 query_index += 1
                 
             # 하나씩 info_row를 확인. 해당하지 않는 경우 info_strainer에 False
-            for idx, info_row in enumerate(info2number_list):
-                
+            for idx, info_row in enumerate(info_list):                
                 # 걸러지는 경우
                 if not info_strainer[idx]:
                     continue
                 
                 # 계속 진행하는 경우
-                # 위의 dictionary에 없는 경우, 코딩 점수임
-                if element2number_dict.get(query_element) == None:
-                    if int(query_element) > info_row[query_index]:
+                # 위의 list에 없는 경우, 코딩 점수임
+                if query_index < 4:
+                    if query_element != info_row[query_index]:
                         info_strainer[idx] = False
                 else:
-                    if element2number_dict[query_element] != info_row[query_index]:
+                    if int(query_element) > int(info_row[query_index]):
                         info_strainer[idx] = False
+                        
         answer.append(info_strainer.count(True))
-        # print('info_strainer =',info_strainer)
-        # print('info_strainer.count(True) =',info_strainer.count(True))
-        print(query_row, (time.time() - st)*(100000))
     return answer
 
 
