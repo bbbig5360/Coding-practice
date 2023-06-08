@@ -1,31 +1,34 @@
+from collections import defaultdict
+
 def solution(info, query):
     answer = []
+    info_list = []
+    
+    for info_row in info:
+        split_list = info_row.split()
+        tmp_dict = defaultdict(lambda:int(split_list[-1]))
+        for element in split_list:
+            tmp_dict[element]
+        info_list.append(tmp_dict)    
     
     for query_row in query:
-        query_list = query_row.split()
-        # print('query_list =',query_list)
-        
+        query_list = [ x for x in query_row.split() if x != 'and']
+    
         cnt = 0
-        for info_row in info:      
-            query_index = -1
+        for info_row in info_list:      
+            query_idx = -1
             for query_element in query_list:
-                # [and, -] 무시함. 이후 index 맞춰줄 것
-                if query_element == 'and':
+                if query_element == '-':
+                    query_idx += 1
                     continue
-                elif query_element == '-':
-                    query_index += 1
-                    continue
-                else:
-                    query_index += 1
+                query_idx += 1
                 
-                # 마지막 조건까지 맞는다면 조건에 부합하는 것으로 카운트
-                if query_index < 4:
+                if query_idx != 4:
                     if query_element not in info_row:
                         break
                 else:
-                    if int(query_element) <= int(info_row.split()[-1]):
+                    if int(query_element) <= list(info_row.values())[0]:
                         cnt += 1
-                            
         answer.append(cnt)
     return answer
 
