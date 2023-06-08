@@ -1,50 +1,40 @@
-import time
-
 def solution(info, query):
     answer = []
     info_list = []    
     
-    st = time.time()
     for idx, info_row in enumerate(info):
         info_list.append(info_row.split())
 
-    print('info to number time =',(time.time() - st)*(100000))
-    st = time.time()
     for query_row in query:
-        print((time.time() - st)*(100000))
-        st = time.time()
         query_list = query_row.split()
         info_strainer = [True]*len(info)
         # print('query_list =',query_list)
         
-        query_index = -1
-        # query 내부 원소값으로 비교함. 해당 인덱스의 위치는 query index로 설정
-        for query_element in query_list:
-            # [and, -] 무시함. 이후 index 맞춰줄 것
-            if query_element == 'and':
-                continue
-            elif query_element == '-':
-                query_index += 1
-                continue
-            else:
-                query_index += 1
+        cnt = 0
+        for info_row in info_list:
+            if not info_strainer[idx]:
+                continue                
                 
-            # 하나씩 info_row를 확인. 해당하지 않는 경우 info_strainer에 False
-            for idx, info_row in enumerate(info_list):                
-                # 걸러지는 경우
-                if not info_strainer[idx]:
+            query_index = -1
+            for query_element in query_list:
+                # [and, -] 무시함. 이후 index 맞춰줄 것
+                if query_element == 'and':
                     continue
+                elif query_element == '-':
+                    query_index += 1
+                    continue
+                else:
+                    query_index += 1
                 
-                # 계속 진행하는 경우
-                # 위의 list에 없는 경우, 코딩 점수임
+                # 마지막 조건까지 맞는다면 조건에 부합하는 것으로 카운트
                 if query_index < 4:
                     if query_element != info_row[query_index]:
-                        info_strainer[idx] = False
+                        break
                 else:
-                    if int(query_element) > int(info_row[query_index]):
-                        info_strainer[idx] = False
-                        
-        answer.append(info_strainer.count(True))
+                    if int(query_element) <= int(info_row[query_index]):
+                        cnt += 1
+                            
+        answer.append(cnt)
     return answer
 
 
