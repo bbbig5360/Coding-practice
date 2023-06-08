@@ -1,20 +1,12 @@
 def solution(info, query):
     answer = []
-    info_list = []    
     
-    for idx, info_row in enumerate(info):
-        info_list.append(info_row.split())
-
     for query_row in query:
         query_list = query_row.split()
-        info_strainer = [True]*len(info)
         # print('query_list =',query_list)
         
         cnt = 0
-        for info_row in info_list:
-            if not info_strainer[idx]:
-                continue                
-                
+        for info_row in info:      
             query_index = -1
             for query_element in query_list:
                 # [and, -] 무시함. 이후 index 맞춰줄 것
@@ -28,10 +20,10 @@ def solution(info, query):
                 
                 # 마지막 조건까지 맞는다면 조건에 부합하는 것으로 카운트
                 if query_index < 4:
-                    if query_element != info_row[query_index]:
+                    if query_element not in info_row:
                         break
                 else:
-                    if int(query_element) <= int(info_row[query_index]):
+                    if int(query_element) <= int(info_row.split()[-1]):
                         cnt += 1
                             
         answer.append(cnt)
